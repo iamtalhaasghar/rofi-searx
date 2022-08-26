@@ -17,9 +17,9 @@ import html
 ################################################################################
 #####                      C O N F I G U R A T I O N                      ######
 ################################################################################
-SEARCH_ENGINE = 'google'            # or 'duckduckgo'
-BROWSER = 'chrome'                  # or 'firefox', 'chromium', 'brave', 'lynx'
-TERMINAL = ['gnome-terminal', '--'] # or ['st', '-e'] or something like that
+SEARCH_ENGINE = 'searx'            # or 'duckduckgo'
+BROWSER = 'firefox'                  # or 'firefox', 'chromium', 'brave', 'lynx'
+TERMINAL = ['xfce4-terminal', '--'] # or ['st', '-e'] or something like that
 ################################################################################
 
 CONFIG = {
@@ -39,15 +39,18 @@ CONFIG = {
     },
     'SEARCH_ENGINE_NAME' : {
         'google' : 'Google',
-        'duckduckgo' : 'DuckDuckGo'
+        'duckduckgo' : 'DuckDuckGo',
+        'searx' : 'Searx'
     },
     'SEARCH_URL' : {
         'google' : 'https://www.google.com/search?q=',
-        'duckduckgo' : 'https://duckduckgo.com/?q='
+        'duckduckgo' : 'https://duckduckgo.com/?q=',
+        'searx' : 'https://searx.be/?q='
     },
     'SUGGESTION_URL' : {
         'google' : 'https://www.google.com/complete/search?',
-        'duckduckgo' : 'https://duckduckgo.com/ac/?'
+        'duckduckgo' : 'https://duckduckgo.com/ac/?',
+        'searx' : 'https://duckduckgo.com/ac/?'
     }
 }
 
@@ -171,11 +174,12 @@ if __name__ == "__main__":
                     'BROWSER' : BROWSER,
                     'TERMINAL' : TERMINAL
                 }
-            os.makedirs(os.path.dirname(fname))
+            os.makedirs(os.path.dirname(fname), exist_ok=True)
             f = open(fname, 'w')
             f.write(json.dumps(config, indent=4))
             f.write('\n')
             f.close()
         main()
-    except:
+    except Exception as e:
+        print(e)
         sys.exit(1)
