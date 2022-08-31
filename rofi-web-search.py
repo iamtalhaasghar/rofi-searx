@@ -131,6 +131,9 @@ def main():
     elif search_string == '':
         print('!!-- Type something and search it with %s' % CONFIG['SEARCH_ENGINE_NAME'][SEARCH_ENGINE])
         print('!!-- Close your search string with "!" to get search suggestions')
+    elif search_string.startswith('='):
+        out = eval(search_string[1:].strip())
+        print(search_string[1:],'=',out)
     elif '.' in search_string: # user has typed a website
         url = 'https://' + search_string
         sp.Popen(CONFIG['BROWSER_PATH'][BROWSER] + [url], stdout=sp.DEVNULL, stderr=sp.DEVNULL, shell=False)
